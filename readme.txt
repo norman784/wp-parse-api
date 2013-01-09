@@ -53,7 +53,7 @@ Initial Commit
 
 == About ==
 
-Contributors: norman784
+Contributors: normanpaniagua
 Tags: parse.com, api
 Requires at least: 3.0.1 (not tested)
 Tested up to: 3.5
