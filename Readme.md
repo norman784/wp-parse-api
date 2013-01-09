@@ -1,11 +1,4 @@
 # Wordpress Parse Api
-Contributors: markjaquith, mdawaffe (this should be a list of wordpress.org userid's)
-Tags: parse.com, api
-Requires at least: 3.0.1
-Tested up to: 3.5
-Stable tag: 4.3
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Bridge between parse.com api and wordpress
 
@@ -57,3 +50,12 @@ Then use the SDK of your prefered platform and start coding.
 
 **0.1**
 Initial Commit 
+
+## About
+
+Contributors: norman784
+Tags: parse.com, api
+Requires at least: 3.0.1 (not tested)
+Tested up to: 3.5
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
