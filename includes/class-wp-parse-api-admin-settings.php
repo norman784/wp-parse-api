@@ -29,6 +29,8 @@ if (is_admin()){	 // admin actions
 		$wp_posts = get_posts();
 		
 		foreach ($wp_posts as $wp) {
+			if ($wp->post_status != 'publish') continue;
+			
 			$post = $post = WpParseApiHelpers::postToObject($wp->ID);
 			
 			foreach ($parse_posts as $pp) {
