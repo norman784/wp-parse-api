@@ -9,7 +9,7 @@ if (!current_user_can('manage_options')) {
 	<div id="icon-options-general" class="icon32"><br></div>
 	<h2>Parse Api</h2>
 
-	<p>Register your app on <a href="http://parse.com">parse.com</a> then complete this form with the information about your app.</p>
+	<p>Register your app on <a href="http://parse.com" target="_blank">parse.com</a> then complete this form with the information about your app.</p>
 
 	<h3>Settings</h3>
 

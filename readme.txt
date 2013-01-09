@@ -1,4 +1,4 @@
-# Wordpress Parse Api
+=== Wordpress Parse Api ===
 Contributors: markjaquith, mdawaffe (this should be a list of wordpress.org userid's)
 Tags: parse.com, api
 Requires at least: 3.0.1
@@ -9,20 +9,20 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Bridge between parse.com api and wordpress
 
-## Description
+== Description ==
 
 The goal of this plugin its to replicate all your posts to parse.com so you can easily
 develop mobile apps, because I find very useful their SDK and help us to develop
 apps faster without worring about the security or if someone else can read data from our blog
 and use it.
 
-## Features
+== Features ==
 
 * Post object saved (create/update) to parse.com
 * Push notifications when new post published
 * Sync old post to parse.com
 
-## Installation
+== Installation ==
 
 1. Create your account on Parse.com
 2. Create an app
@@ -39,13 +39,13 @@ and use it.
 7. Fill the form with the data from your Parse.com app dashboard
 8. At this point it must be ready to use it
 
-## Frequently Asked Questions
+== Frequently Asked Questions ==
 
-### Why Parse.com?
+= Why Parse.com? =
 
 Because I find there a well documented SDK's for the most popular mobile platforms.
 
-### How it works?
+= How it works? =
 
 Configure the plugin under Settings -> Parse Api as describe in the instalation. 
 Every time you publish or save a published post it will create/update their 
@@ -53,7 +53,7 @@ respective row on parse.com
 
 Then use the SDK of your prefered platform and start coding.
 
-## Changelog
+== Changelog ==
 
-**0.1**
+= 0.1 =
 Initial Commit 
