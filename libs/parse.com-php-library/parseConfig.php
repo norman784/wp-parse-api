@@ -5,8 +5,8 @@ define('WP_PARSE_API_APP_RESTKEY'	, get_option('app_restkey'));
 define('WP_PARSE_API_OBJECT_NAME'	, get_option('object_name') == "" ? 'Post' : get_option('object_name'));
 
 class parseConfig {
-	const APPID = WP_PARSE_API_APP_ID;
-	const MASTERKEY = WP_PARSE_API_MASTERKEY;
-	const RESTKEY = WP_PARSE_API_APP_RESTKEY;
-	const PARSEURL = 'https://api.parse.com/1/';
+	var $APPID = WP_PARSE_API_APP_ID;
+	var $MASTERKEY = WP_PARSE_API_MASTERKEY;
+	var $RESTKEY = WP_PARSE_API_APP_RESTKEY;
+	var $PARSEURL = 'https://api.parse.com/1/';
 }

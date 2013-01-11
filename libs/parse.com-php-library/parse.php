@@ -22,17 +22,10 @@ class parseRestClient{
 	public function __construct(){
 		$parseConfig = new parseConfig;
 		
-		if (phpversion() < 5.3) {
-			$this->_appid = $parseConfig->APPID;
-	    	$this->_masterkey = $parseConfig->MASTERKEY;
-	    	$this->_restkey = $parseConfig->RESTKEY;
-	    	$this->_parseurl = $parseConfig->PARSEURL;
-		} else {
-			$this->_appid = $parseConfig::APPID;
-	    	$this->_masterkey = $parseConfig::MASTERKEY;
-	    	$this->_restkey = $parseConfig::RESTKEY;
-	    	$this->_parseurl = $parseConfig::PARSEURL;
-		}
+		$this->_appid = $parseConfig->APPID;
+		$this->_masterkey = $parseConfig->MASTERKEY;
+		$this->_restkey = $parseConfig->RESTKEY;
+		$this->_parseurl = $parseConfig->PARSEURL;
 
 		if(empty($this->_appid) || empty($this->_restkey) || empty($this->_masterkey)){
 			$this->throwError('You must set your Application ID, Master Key and REST API Key');
@@ -202,8 +195,12 @@ class ParseLibraryException extends Exception{
 		if($code != 0){
 			$message = "parse.com error: ".$message;
 		}
-
-		parent::__construct($message, $code, $previous);
+		
+		if (phpversion() < 5.3) {
+			parent::__construct($message, $code);
+		} else {
+			parent::__construct($message, $code, $previous);
+		}
 	}
 
 	public function __toString() {

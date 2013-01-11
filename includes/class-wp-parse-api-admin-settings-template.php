@@ -43,7 +43,7 @@ if (!current_user_can('manage_options')) {
 				<li>- categories (Array)</li>
 				<li>- content (String)</li>
 				<li>- date (String)</li>
-				<li>- thumbnail (Array)</li>
+				<li>- thumbnail (Object)</li>
 				<li>- title (String)</li>
 				<li>- wpId (Number)</li>
 			</ul>
