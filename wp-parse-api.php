@@ -29,48 +29,74 @@ require WP_PARSE_API_PATH . 'libs/parse.com-php-library/parse.php';
 require WP_PARSE_API_PATH . 'includes/class-wp-parse-api-helpers.php';
 require WP_PARSE_API_PATH . 'includes/class-wp-parse-api-admin-settings.php';
 
-/*
-Add the hook to create/update the post on parse.com
-*/
-
-add_action('save_post', 'wp_parse_api_publish_hook');
-
-function wp_parse_api_publish_hook($post_id) {
-	$post_id = wp_is_post_revision($post_id) || $post_id;
+class WpParseApi
+{
+	/**
+	 * Plugin instance.
+	 *
+	 * @see get_instance()
+	 * @type object
+	 */
+	protected static $instance	= NULL;
 	
-	// Check if the parse api app id is defined
-	if (!defined('WP_PARSE_API_APP_ID') || WP_PARSE_API_APP_ID == null) {
-		return;
+	protected $action			= 'wpparseapi_79898';
+	protected $option_name		= 'wpparseapi_79898';
+	protected $page_id			= NULL;
+	
+	/**
+	 * Access this plugin’s working instance
+	 *
+	 * @wp-hook wp_loaded
+	 * @return  object of this class
+	 */
+	public static function get_instance()
+	{
+	    NULL === self::$instance and self::$instance = new self;
+	    return self::$instance;
 	}
-	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-		return;
+	
+	/**
+	 * Add the hook to create/update the post on parse.com
+	 *
+	 */
+	public function register()
+	{
+		add_action('save_post', array($this, ''));
 	}
-	// if (!wp_verify_nonce($_POST['wp_parse_api_nonce'], plugin_basename(__FILE__))) {
-	// 		echo "return wp_verify_nonce\n";
-	// 		return;
-	// 	}
-	if (get_post_status($post_id) != 'publish') {
-		return;
-	}
 	
-	$post = WpParseApiHelpers::postToObject($post_id);
+	/**
+	 * Create/Update the post on parse.com
+	 *
+	 */
+	public function save_post()
+	{
+		$post_id = wp_is_post_revision($post_id) || $post_id;
 	
-	// Creates a new post on parse.com
-	if (!get_post_meta($post_id, 'wp_parse_api_code_run', true)) {
-		update_post_meta($post_id, 'wp_parse_api_code_run', true);
+		// Check if the parse api app id is defined
+		if (!defined('WP_PARSE_API_APP_ID') || WP_PARSE_API_APP_ID == null) return;
+		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+		if (!wp_verify_nonce( $_POST[ $this->option_name . '_nonce' ], $this->action)) return;
+		if (get_post_status($post_id) != 'publish') return;
 	
-		$push = new parsePush($post->data['title']);
-		$push->channels = $categories;
-		$push->send();
+		$post = WpParseApiHelpers::postToObject($post_id);
+	
+		// Creates a new post on parse.com
+		if (!get_post_meta($post_id, 'wp_parse_api_code_run', true)) {
+			update_post_meta($post_id, 'wp_parse_api_code_run', true);
+	
+			$push = new parsePush($post->data['title']);
+			$push->channels = $categories;
+			$push->send();
 		
-		$post->save();
-	// Update an existin post on parse.com
-	} else {
-		$q = new parseQuery(WP_PARSE_API_OBJECT_NAME);
-		$q->where('wpId', (int)$post_id);
-		$r = $q->find();
+			$post->save();
+		// Update an existin post on parse.com
+		} else {
+			$q = new parseQuery(WP_PARSE_API_OBJECT_NAME);
+			$q->where('wpId', (int)$post_id);
+			$r = $q->find();
 		
-		if (is_array($r->results)) $r = array_shift($r->results);
-		if ($r != null) $post->update($r->objectId);
+			if (is_array($r->results)) $r = array_shift($r->results);
+			if ($r != null) $post->update($r->objectId);
+		}
 	}
 }

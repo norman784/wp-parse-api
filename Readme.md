@@ -23,7 +23,7 @@ and use it.
 	* categories (Array)
 	* content (String)
 	* date (String)
-	* thumbnail (Array)
+	* thumbnail (Object)
 	* title (String)
 	* wpId (Number)
 4. Upload `wp-parse-api` to the `/wp-content/plugins/` directory

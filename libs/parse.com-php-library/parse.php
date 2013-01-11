@@ -21,10 +21,18 @@ class parseRestClient{
 
 	public function __construct(){
 		$parseConfig = new parseConfig;
-		$this->_appid = $parseConfig::APPID;
-    	$this->_masterkey = $parseConfig::MASTERKEY;
-    	$this->_restkey = $parseConfig::RESTKEY;
-    	$this->_parseurl = $parseConfig::PARSEURL;
+		
+		if (phpversion() < 5.3) {
+			$this->_appid = $parseConfig->APPID;
+	    	$this->_masterkey = $parseConfig->MASTERKEY;
+	    	$this->_restkey = $parseConfig->RESTKEY;
+	    	$this->_parseurl = $parseConfig->PARSEURL;
+		} else {
+			$this->_appid = $parseConfig::APPID;
+	    	$this->_masterkey = $parseConfig::MASTERKEY;
+	    	$this->_restkey = $parseConfig::RESTKEY;
+	    	$this->_parseurl = $parseConfig::PARSEURL;
+		}
 
 		if(empty($this->_appid) || empty($this->_restkey) || empty($this->_masterkey)){
 			$this->throwError('You must set your Application ID, Master Key and REST API Key');

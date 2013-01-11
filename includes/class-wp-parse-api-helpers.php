@@ -17,18 +17,20 @@ class WpParseApiHelpers {
 			'Aug' => 'Ago',
 			'Dec' => 'Dic'
 		));
-	
+		
 		$thumbnails = array(
-			'thumbnail'	=> get_the_post_thumbnail($post_id, 'thumbnail'),
-			'medium'	=> get_the_post_thumbnail($post_id, 'medium'),
-			'large' 	=> get_the_post_thumbnail($post_id, 'large'),
-			'full'		=> get_the_post_thumbnail($post_id, 'full')
+			'thumbnail'	=> wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'thumbnail' ),
+			'medium'	=> wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium' ),
+			'large' 	=> wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'large' ),
+			'full'		=> wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'full' )
 		);
 	
 		foreach ($thumbnails as $k=>$v):
-			if ($v == null || strlen($v) == 0)
-				unset($thumbnails[$k]);
+			if (!is_array($v)) unset($thumbnails[$k]);
+			else $thumbnails[$k] = array_shift($v);
 		endforeach;
+		
+		if (count($thumbnails) == 0) $thumbnails = new stdClass();
 	
 		$post->wpId			= (int)$post_id;
 		$post->categories	= $categories;
