@@ -48,6 +48,13 @@ Then use the SDK of your prefered platform and start coding.
 
 == Changelog ==
 
+= 0.2 =
+
+* Fix: parseRestClient (3rd party class) to get to work in php < 5.3
+* Fix: thumbnails tag img was returned before the fix, now returns the url
+* wp-parse-api.php: changed functions to class (work in progress to migrate all to OOP)
+* Readme: changed thumbnail type to Object
+
 = 0.1 =
 Initial Commit 
 

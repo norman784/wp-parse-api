@@ -3,7 +3,7 @@
 Plugin Name: Parse.com Api
 Plugin URI: http://github.com/norman784/wp-parse-api
 Description: Bridge between parse.com api and wordpress
-Version: 0.1
+Version: 0.2
 Author: Norman Paniagua
 Author URI: http://github.com/norman784
 License: GPL2
