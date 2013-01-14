@@ -57,10 +57,10 @@ if (is_admin()){	 // admin actions
 		++$_GET['wp-parse-api-parse'];
 		$url = $_SERVER['PHP_SELF'];
 		
-		foreach ($_GET as $k=>$v): {
+		foreach ($_GET as $k=>$v):
 			$qs = (strpos($url, '?') === false ? '?' : '&');
 			$url .= sprintf("%s%s=%s", $qs, $k, $v);
-		}
+		endforeach;
 		
 		wp_redirect( $url );
 	}
