@@ -48,6 +48,9 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
+**0.2.1**
+* Fix: now sync all posts instead of the first 5
+
 **0.2**
 * Add a fix for the 3rd party class parseRestClient to get to work in php < 5.3
 * Readme: changed thumbnail type to Object

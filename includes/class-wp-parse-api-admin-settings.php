@@ -23,10 +23,21 @@ if (is_admin()){	 // admin actions
 	}
 	
 	function wp_parse_api_sync() {
+		$numberposts = 20;
+		$_GET['wp-parse-api-parse'] = (int)$_GET['wp-parse-api-parse'];
+		
 		$q = new parseQuery(WP_PARSE_API_OBJECT_NAME);
 		$parse_posts = $q->find();
 		$parse_posts = $parse_posts->results;
-		$wp_posts = get_posts();
+		$wp_posts = get_posts(array(
+			'numberposts' => $numberposts,
+			'offset' => ($_GET['wp-parse-api-page'] * $numberposts) / $numberposts
+		));
+			
+		if (count($wp_posts) == 0) {
+			wp_redirect( 'options-general.php?page=wp-parse-api-options' );
+			exit;
+		}
 		
 		foreach ($wp_posts as $wp) {
 			if ($wp->post_status != 'publish') continue;
@@ -43,6 +54,14 @@ if (is_admin()){	 // admin actions
 			if ($post != null) $post->save();
 		}
 		
-		wp_redirect( 'options-general.php?page=wp-parse-api-options' );
+		++$_GET['wp-parse-api-parse'];
+		$url = $_SERVER['PHP_SELF'];
+		
+		foreach ($_GET as $k=>$v): {
+			$qs = (strpos($url, '?') === false ? '?' : '&');
+			$url .= sprintf("%s%s=%s", $qs, $k, $v);
+		}
+		
+		wp_redirect( $url );
 	}
 }
