@@ -23,6 +23,8 @@ and use it.
 	* categories (Array)
 	* content (String)
 	* date (String)
+	* guid (String)
+	* photos (Array)
 	* thumbnail (Object)
 	* title (String)
 	* wpId (Number)
