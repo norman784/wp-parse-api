@@ -50,6 +50,11 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
+**0.2.2**
+* Added guid and photos fields
+* Embed photos in the content field will be extracted and pushed on photos field
+* Strip certain html tags
+
 **0.2.1**
 * Fix: now sync all posts instead of the first 5
 
