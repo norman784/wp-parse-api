@@ -42,6 +42,9 @@ class WpParseApiHelpers {
 		
 		$content = preg_replace('/\[.*?\]/', '', $wp_post->post_content);
 		$content = strip_tags($content, "<p><strong><div><em><ul><li><br><span>");
+		$content = explode('<!--more-->', $content);
+		$content[0] = strip_tags($content[0]);
+		$content = implode('<!--more-->', $content);
 	
 		$post->categories	= $categories;
 		$post->content 		= $content;
