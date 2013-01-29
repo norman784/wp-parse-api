@@ -47,7 +47,6 @@ class parseRestClient{
 		
 		// <!--- Ugly hack taken from http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/
 		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, 0);
-	  	curl_setopt($c, CURLOPT_SSL_VERIFYPEER, 0);
 		// --->
 		
 		if(substr($args['requestUrl'],0,5) == 'files'){

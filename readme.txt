@@ -50,6 +50,11 @@ Then use the SDK of your prefered platform and start coding.
 
 == Changelog ==
 
+= 0.2.3 =
+* Fix sync, now the pagination works fine.
+* Now refresh via javascript, instead of php wp_rediect to prevent browser error "too many redirections"
+* Changed sort tag php with full php tag
+
 = 0.2.2 =
 * Added guid and photos fields
 * Embed photos in the content field will be extracted and pushed on photos field

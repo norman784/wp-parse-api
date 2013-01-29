@@ -1,4 +1,4 @@
-<?
+<?php
 class WpParseApiHelpers {
 	static public function postToObject($post_id) {
 		$wp_post = get_post($post_id);

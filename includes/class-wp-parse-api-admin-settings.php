@@ -24,20 +24,30 @@ if (is_admin()){	 // admin actions
 	
 	function wp_parse_api_sync() {
 		$numberposts = 20;
-		$_GET['wp-parse-api-parse'] = (int)$_GET['wp-parse-api-parse'];
+		$_GET['wp-parse-api-page'] = (int)$_GET['wp-parse-api-page'];
 		
-		$q = new parseQuery(WP_PARSE_API_OBJECT_NAME);
-		$parse_posts = $q->find();
-		$parse_posts = $parse_posts->results;
+		if (!session_id()) session_start();
+		
+		if (!isset($_SESSION['parse_posts']) || count($_SESSION['parse_posts']) == 0) {
+			$q = new parseQuery(WP_PARSE_API_OBJECT_NAME);
+			$parse_posts = $q->find();
+			$parse_posts = $_SESSION['parse_posts'] = $parse_posts->results;
+		} else {
+			$parse_posts = $_SESSION['parse_posts'];
+		}
+		
 		$wp_posts = get_posts(array(
 			'numberposts' => $numberposts,
-			'offset' => ($_GET['wp-parse-api-page'] * $numberposts) / $numberposts
+			'offset' => $_GET['wp-parse-api-page']
 		));
 			
 		if (count($wp_posts) == 0) {
 			wp_redirect( 'options-general.php?page=wp-parse-api-options' );
 			exit;
 		}
+		
+		$updated = 0;
+		$created = 0;
 		
 		foreach ($wp_posts as $wp) {
 			if ($wp->post_status != 'publish') continue;
@@ -54,7 +64,7 @@ if (is_admin()){	 // admin actions
 			if ($post != null) $post->save();
 		}
 		
-		++$_GET['wp-parse-api-parse'];
+		++$_GET['wp-parse-api-page'];
 		$url = $_SERVER['PHP_SELF'];
 		
 		foreach ($_GET as $k=>$v):
@@ -62,6 +72,8 @@ if (is_admin()){	 // admin actions
 			$url .= sprintf("%s%s=%s", $qs, $k, $v);
 		endforeach;
 		
-		wp_redirect( $url );
+		//wp_redirect( $url );
+		echo "Page:". ($_GET['wp-parse-api-page']-1) ."<script> setTimeout(\"document.location='$url'\", 1000); </script>";
+		exit;
 	}
 }
