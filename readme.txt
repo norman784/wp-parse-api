@@ -50,6 +50,11 @@ Then use the SDK of your prefered platform and start coding.
 
 == Changelog ==
 
+= 0.2.4 =
+* Fix sync, now update/insert works
+* Fix img src isolation
+* Changed limit per page from 20 to 10
+
 = 0.2.3 =
 * Fix sync, now the pagination works fine.
 * Now refresh via javascript, instead of php wp_rediect to prevent browser error "too many redirections"

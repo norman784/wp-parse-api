@@ -23,45 +23,38 @@ if (is_admin()){	 // admin actions
 	}
 	
 	function wp_parse_api_sync() {
-		$numberposts = 20;
+		$numberposts = 10;
 		$_GET['wp-parse-api-page'] = (int)$_GET['wp-parse-api-page'];
+		if ($_GET['wp-parse-api-page'] < 1) $_GET['wp-parse-api-page'] = 1;
 		
-		if (!session_id()) session_start();
-		
-		if (!isset($_SESSION['parse_posts']) || count($_SESSION['parse_posts']) == 0) {
-			$q = new parseQuery(WP_PARSE_API_OBJECT_NAME);
-			$parse_posts = $q->find();
-			$parse_posts = $_SESSION['parse_posts'] = $parse_posts->results;
-		} else {
-			$parse_posts = $_SESSION['parse_posts'];
-		}
-		
-		$wp_posts = get_posts(array(
+		$options = array(
 			'numberposts' => $numberposts,
-			'offset' => $_GET['wp-parse-api-page']
-		));
+			'offset' => ($_GET['wp-parse-api-page'] * $numberposts) - $numberposts,
+		);
+		
+		print_r($options);
+		
+		$wp_posts = get_posts($options);
 			
 		if (count($wp_posts) == 0) {
 			wp_redirect( 'options-general.php?page=wp-parse-api-options' );
 			exit;
 		}
 		
-		$updated = 0;
-		$created = 0;
-		
 		foreach ($wp_posts as $wp) {
 			if ($wp->post_status != 'publish') continue;
-			
+									
 			$post = WpParseApiHelpers::postToObject($wp->ID);
-			
-			foreach ($parse_posts as $pp) {
-				if ((int)$pp->wpId == (int)$wp->ID) {
-					$post->update($pp->objectId);
-					$post = null;
-				}
+			$q = new parseQuery(WP_PARSE_API_OBJECT_NAME);
+			$q->whereEqualTo('wpId', $wp->ID);
+			$q->setLimit(1);
+			$result = $q->find();
+									
+			if ($result->results[0]) {
+				$post->update($result->results[0]->objectId);
+			} else {
+				$post->save();
 			}
-			
-			if ($post != null) $post->save();
 		}
 		
 		++$_GET['wp-parse-api-page'];

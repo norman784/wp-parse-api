@@ -33,12 +33,7 @@ class WpParseApiHelpers {
 		
 		if (count($thumbnails) == 0) $thumbnails = new stdClass();
 		
-		preg_match_all('/<img[^>]+>/i',$wp_post->post_content, $photos);
-		
-		foreach ($photos as $i=>$img_tags) {
-			preg_match_all('/(src)=("[^"]*")/i',$img_tag, $photos[$i]);
-			$photos[$i] = array_shift($photos[$i]);
-		}
+		preg_match_all('/<img[^>]+src=[\'"]([^\'"]+)[\'"].*>/i',$wp_post->post_content, $photos);
 		
 		$content = preg_replace('/\[.*?\]/', '', $wp_post->post_content);
 		$content = strip_tags($content, "<p><strong><div><em><ul><li><br><span>");
@@ -50,7 +45,7 @@ class WpParseApiHelpers {
 		$post->content 		= $content;
 		$post->date			= $date;
 		$post->guid			= $wp_post->guid;
-		$post->photos		= $photos;
+		$post->photos		= $photos[1];
 		$post->thumbnail	= $thumbnails;
 		$post->title		= $wp_post->post_title;
 		$post->wpId			= (int)$post_id;
