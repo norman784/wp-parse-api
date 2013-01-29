@@ -32,8 +32,6 @@ if (is_admin()){	 // admin actions
 			'offset' => ($_GET['wp-parse-api-page'] * $numberposts) - $numberposts,
 		);
 		
-		print_r($options);
-		
 		$wp_posts = get_posts($options);
 			
 		if (count($wp_posts) == 0) {
