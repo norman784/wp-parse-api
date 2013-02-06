@@ -50,6 +50,10 @@ Then use the SDK of your prefered platform and start coding.
 
 == Changelog ==
 
+= 0.2.5 =
+* Fix sync, now update/insert works
+* Added log helper
+
 = 0.2.4 =
 * Fix sync, now update/insert works
 * Fix img src isolation

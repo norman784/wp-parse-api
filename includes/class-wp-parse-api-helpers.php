@@ -52,4 +52,9 @@ class WpParseApiHelpers {
 		
 		return $post;
 	}
+	
+	public static function log($message) {
+		if (!defined('LOG')) return;
+		file_put_contents(LOG, "{$message}\n", FILE_APPEND);
+	}
 }

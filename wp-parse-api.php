@@ -24,10 +24,14 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+// define('LOG', dirname(__FILE__) . '/log');
+
 define('WP_PARSE_API_PATH', plugin_dir_path(__FILE__));
 require WP_PARSE_API_PATH . 'libs/parse.com-php-library/parse.php';
 require WP_PARSE_API_PATH . 'includes/class-wp-parse-api-helpers.php';
 require WP_PARSE_API_PATH . 'includes/class-wp-parse-api-admin-settings.php';
+
+add_action('wp_loaded', array(WpParseApi::get_instance(), 'register'));
 
 class WpParseApi
 {
@@ -51,6 +55,7 @@ class WpParseApi
 	 */
 	public static function get_instance()
 	{
+		WpParseApiHelpers::log('WpParseApi::get_instance()');
 	    NULL === self::$instance and self::$instance = new self;
 	    return self::$instance;
 	}
@@ -61,22 +66,32 @@ class WpParseApi
 	 */
 	public function register()
 	{
-		add_action('save_post', array($this, ''));
+		WpParseApiHelpers::log('WpParseApi::register()');
+		add_action('save_post', array($this, 'save_post'));
 	}
 	
 	/**
 	 * Create/Update the post on parse.com
 	 *
 	 */
-	public function save_post()
+	public function save_post($post_id)
 	{
-		$post_id = wp_is_post_revision($post_id) || $post_id;
-	
+		WpParseApiHelpers::log("WpParseApi::save_post($post_id) | START");
+		
+		// Verify post is a revision
+		if (wp_is_post_revision($post_id)) return;
 		// Check if the parse api app id is defined
 		if (!defined('WP_PARSE_API_APP_ID') || WP_PARSE_API_APP_ID == null) return;
+		WpParseApiHelpers::log("WpParseApi::save_post($post_id) | WP_PARSE_API_APP_ID passed");
+		// Verify post is an autosave
 		if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-		if (!wp_verify_nonce( $_POST[ $this->option_name . '_nonce' ], $this->action)) return;
+		WpParseApiHelpers::log("WpParseApi::save_post($post_id) | DOING_AUTOSAVE passed");
+		// Verify post nonce
+		// if (!wp_verify_nonce( $_POST[ $this->option_name . '_nonce' ], $this->action)) return;
+		// WpParseApiHelpers::log("WpParseApi::save_post($post_id) | nonce passed");
+		// Verify post status
 		if (get_post_status($post_id) != 'publish') return;
+		WpParseApiHelpers::log("WpParseApi::save_post($post_id) | status passed");
 	
 		$post = WpParseApiHelpers::postToObject($post_id);
 	
@@ -98,5 +113,7 @@ class WpParseApi
 			if (is_array($r->results)) $r = array_shift($r->results);
 			if ($r != null) $post->update($r->objectId);
 		}
+		
+		WpParseApiHelpers::log("WpParseApi::save_post($post_id) | END");
 	}
 }
