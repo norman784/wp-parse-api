@@ -51,6 +51,9 @@ Then use the SDK of your prefered platform and start coding.
 == Changelog ==
 
 = 0.2.6 =
+* Fix push notifications, now it get the categories from the post
+
+= 0.2.6 =
 * Fix to remove the bbcode and their content
 
 = 0.2.5 =

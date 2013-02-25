@@ -49,6 +49,8 @@ respective row on parse.com
 Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
+**0.2.7**
+* Fix push notifications, now it get the categories from the post
 
 **0.2.6**
 * Fix to remove the bbcode and their content
