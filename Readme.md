@@ -50,6 +50,9 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
+**0.2.6**
+* Fix to remove the bbcode and their content
+
 **0.2.5**
 * Fix sync, now update/insert works
 * Added log helper
