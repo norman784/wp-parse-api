@@ -35,8 +35,9 @@ class WpParseApiHelpers {
 		
 		preg_match_all('/<img[^>]+src=[\'"]([^\'"]+)[\'"].*>/i',$wp_post->post_content, $photos);
 		
-		$content = preg_replace('/\[.*?\]/', '', $wp_post->post_content);
-		$content = strip_tags($content, "<p><strong><div><em><ul><li><br><span>");
+		$content = preg_replace('/\[.*?\](.+?)\[\/.*?\]/is', '', $wp_post->post_content);
+		$content = strtr($content, array('<p>&nbsp;</p>'=>''));
+		// $content = strip_tags($content, "<p><strong><div><em><ul><li><br><span>");
 		$content = explode('<!--more-->', $content);
 		$content[0] = strip_tags($content[0]);
 		$content = implode('<!--more-->', $content);
