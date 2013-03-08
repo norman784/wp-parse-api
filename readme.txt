@@ -50,6 +50,9 @@ Then use the SDK of your prefered platform and start coding.
 
 == Changelog ==
 
+= 0.2.8 =
+* Small improvement, if categories are empty no push notification will be send
+
 = 0.2.6 =
 * Fix push notifications, now it get the categories from the post
 

@@ -3,7 +3,7 @@
 Plugin Name: Parse.com Api
 Plugin URI: http://github.com/norman784/wp-parse-api
 Description: Bridge between parse.com api and wordpress
-Version: 0.2.7
+Version: 0.2.8
 Author: Norman Paniagua
 Author URI: http://github.com/norman784
 License: GPL2
@@ -105,9 +105,11 @@ class WpParseApi
 				$categories[] = preg_replace('/[^a-zA-Z]/', '', $row);
 			}
 			
-			$push = new parsePush($post->data['title']);
-			$push->channels = $categories;
-			$push->send();
+			if (count($categories) > 0) {
+				$push = new parsePush($post->data['title']);
+				$push->channels = $categories;
+				$push->send();
+			}
 		
 			$post->save();
 		// Update an existin post on parse.com
