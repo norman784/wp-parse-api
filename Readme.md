@@ -1,4 +1,4 @@
-# Wordpress Parse Api
+# WordPress Parse Api
 
 Bridge between parse.com api and wordpress
 
@@ -50,10 +50,14 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
-**0.2.9***
+**0.3.0**
+* Added an option to turn on/off push notifications
+* Added github plugin updater
+
+**0.2.9**
 * Fix issue if no push certificate or valid push certificate was configured (thanks to raymondmuller)
 
-**0.2.8***
+**0.2.8**
 * Small improvement, if categories are empty no push notification will be send
 
 **0.2.7**
@@ -92,7 +96,7 @@ Then use the SDK of your prefered platform and start coding.
 * In wp-parse-api.php changed functions to class
 
 **0.1**
-Initial Commit 
+Initial Commit
 
 ## About
 
@@ -107,3 +111,9 @@ Tested up to: 3.5
 License: GPLv2 or later
 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+## Current Version
+
+The line below is used for the updater API, please leave it untouched unless bumping the version up :)
+
+~Current Version:0.3.0~

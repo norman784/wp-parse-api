@@ -3,33 +3,49 @@
 Plugin Name: Parse.com Api
 Plugin URI: http://github.com/norman784/wp-parse-api
 Description: Bridge between parse.com api and wordpress
-Version: 0.2.9
+Version: 0.3.0
 Author: Norman Paniagua
 Author URI: http://github.com/norman784
 License: GPL2
 
-Copyright 2013  Wordpress Parse Api  (email : normanpaniagua at gmail dot com)
-
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License, version 2, as 
-published by the Free Software Foundation.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
+/**
+  * @version 0.3.0
+  * @author Norman Paniagua <normanpaniagua at gmail dot com>
+  * @link http://github.com/norman784
+  * @uses WordPress Parse Api @link https://github.com/norman784/wp-parse-api
+  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+  * @copyright Copyright (c) 2013, Norman Paniagua
+  * 
+  * This program is free software; you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License, version 2, as 
+  * published by the Free Software Foundation.
+  * 
+  * This program is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  * GNU General Public License for more details.
+  * 
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, write to the Free Software
+  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  */
 
 // define('LOG', dirname(__FILE__) . '/log');
 
-define('WP_PARSE_API_PATH', plugin_dir_path(__FILE__));
-require WP_PARSE_API_PATH . 'libs/parse.com-php-library/parse.php';
-require WP_PARSE_API_PATH . 'includes/class-wp-parse-api-helpers.php';
-require WP_PARSE_API_PATH . 'includes/class-wp-parse-api-admin-settings.php';
+define( 'WP_PARSE_API_PATH', 			plugin_dir_path(__FILE__));
+define( 'WP_PARSE_API_SLUG', 			plugin_basename( __FILE__ ) );
+define( 'WP_PARSE_API_VERSION', 		0.3 );
+define( 'WP_PARSE_API_PROPER_NAME', 	'wp-parse-api' );
+define( 'WP_PARSE_API_GITHUB_URL', 		'https://github.com/norman784/wp-parse-api' );
+define( 'WP_PARSE_API_GITHUB_ZIP_URL',	'https://github.com/norman784/wp-parse-api/zipball/master' );
+define( 'WP_PARSE_API_GITHUB_API_URL',	'https://api.github.com/repos/norman784/wp-parse-apin' );
+define( 'WP_PARSE_API_GITHUB_RAW_URL',	'https://raw.github.com/jkudish/norman784/wp-parse-api/master' );
+define( 'WP_PARSE_API_REQUIRES_WP',		'3.0.1' );
+define( 'WP_PARSE_API_TESTED_WP',		'3.5.0' );
+
+require_once WP_PARSE_API_PATH . 'libs/parse.com-php-library/parse.php';
+require_once WP_PARSE_API_PATH . 'includes/class-wp-parse-api-helpers.php';
+require_once WP_PARSE_API_PATH . 'includes/class-wp-parse-api-admin-settings.php';
 
 add_action('wp_loaded', array(WpParseApi::get_instance(), 'register'));
 
@@ -105,7 +121,8 @@ class WpParseApi
 				$categories[] = preg_replace('/[^a-zA-Z]/', '', $row);
 			}
 			
-			if (count($categories) > 0) {
+			// Check if there is no categories or push notifications are disabled
+			if (count($categories) > 0 || get_option('app_push_notifications') != 'Off') {
 				try {
 					$push = new parsePush($post->data['title']);
 					$push->channels = $categories;
@@ -131,4 +148,19 @@ class WpParseApi
 		
 		WpParseApiHelpers::log("WpParseApi::save_post($post_id) | END");
 	}
+}
+
+if (is_admin()) {
+	include_once('includes/_updater.php');
+	$config = array(
+		'slug' => WP_PARSE_API_SLUG,
+		'proper_folder_name' => WP_PARSE_API_PROPER_NAME,
+		'api_url' => WP_PARSE_API_GITHUB_API_URL,
+		'raw_url' => WP_PARSE_API_GITHUB_RAW_URL,
+		'github_url' => WP_PARSE_API_GITHUB_URL,
+		'zip_url' => WP_PARSE_API_GITHUB_ZIP_URL,
+		'requires' => WP_PARSE_API_REQUIRES_WP,
+		'tested' => WP_PARSE_API_TESTED_WP,
+	);
+	$github_updater = new wp_github_updater( $config );
 }

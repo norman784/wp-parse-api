@@ -11,11 +11,12 @@ if (!current_user_can('manage_options')) {
 
 	<p>Register your app on <a href="http://parse.com" target="_blank">parse.com</a> then complete this form with the information about your app.</p>
 
-	<h3>Settings</h3>
-
 	<form action="options.php" method="post">
 		<?php settings_fields('wp-parse-api-settings-group'); ?>
 		<?php //do_settings('wp-parse-api-settings-group'); ?>
+		
+		<h3>Settings</h3>
+		
 		<table class="form-table">
 			<tr valign="top">
 				<th  scope="row">App ID</th>
@@ -28,6 +29,17 @@ if (!current_user_can('manage_options')) {
 			<tr valign="top">
 				<th  scope="row">App Rest Key</th>
 				<td><input type="text" name="app_restkey" value="<?php echo get_option('app_restkey'); ?>"></td>
+			</tr>
+			<tr valign="top">
+				<th  scope="row">Push notifications</th>
+				<td>
+					<select name="app_push_notifications">
+						<option>On</option>
+						<option<?php
+							echo get_option('app_push_notifications') == 'Off' ? ' selected="selected"':''
+						?>>Off</option>
+					</select>
+				</td>
 			</tr>
 		</table>
 		

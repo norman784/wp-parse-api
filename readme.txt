@@ -1,4 +1,4 @@
-=== Wordpress Parse Api ===
+=== WordPress Parse Api ===
 
 Bridge between parse.com api and wordpress
 
@@ -49,6 +49,10 @@ respective row on parse.com
 Then use the SDK of your prefered platform and start coding.
 
 == Changelog ==
+
+= 0.3.0 =
+* Added an option to turn on/off push notifications
+* Added github plugin updater
 
 = 0.2.9 =
 * Fix issue if no push certificate or valid push certificate was configured (thanks to raymondmuller)
