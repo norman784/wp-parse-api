@@ -15,7 +15,7 @@ and use it.
 * Push notifications when new post published
 * Turn on/off push notifications when new post published
 * Sync old post to [Parse](http://parse.com)
-* Plugin can be updated from github, thanks to [Wordpress Github Plugin Updater](https://github.com/jkudish/WordPress-GitHub-Plugin-Updater)
+* Plugin can be updated from github, thanks to [WordPress Github Plugin Updater](https://github.com/jkudish/WordPress-GitHub-Plugin-Updater)
 
 ## Installation
 

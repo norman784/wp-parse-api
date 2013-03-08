@@ -30,7 +30,7 @@ License: GPL2
   * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
   */
 
-// define('LOG', dirname(__FILE__) . '/log');
+// define('LOG', dirname(__FILE__) . '/log.txt');
 
 define( 'WP_PARSE_API_PATH', 			plugin_dir_path(__FILE__));
 define( 'WP_PARSE_API_SLUG', 			plugin_basename( __FILE__ ) );
