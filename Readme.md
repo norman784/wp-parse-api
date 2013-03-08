@@ -1,23 +1,25 @@
 # WordPress Parse Api
 
-Bridge between parse.com api and wordpress
+Bridge between [Parse](http://parse.com) api and [WordPress](http://wordpress.org)
 
 ## Description
 
-The goal of this plugin its to replicate all your posts to parse.com so you can easily
+The goal of this plugin its to replicate all your posts to [Parse](http://parse.com) so you can easily
 develop mobile apps, because I find very useful their SDK and help us to develop
 apps faster without worring about the security or if someone else can read data from our blog
 and use it.
 
 ## Features
 
-* Post object saved (create/update) to parse.com
+* Post object saved (create/update) to [Parse](http://parse.com)
 * Push notifications when new post published
-* Sync old post to parse.com
+* Turn on/off push notifications when new post published
+* Sync old post to [Parse](http://parse.com)
+* Plugin can be updated from github, thanks to [Wordpress Github Plugin Updater](https://github.com/jkudish/WordPress-GitHub-Plugin-Updater)
 
 ## Installation
 
-1. Create your account on Parse.com
+1. Create your account on [Parse](http://parse.com)
 2. Create an app
 3. Create an class in the data browser with those fields:
 	* categories (Array)
@@ -44,7 +46,7 @@ Because I find there a well documented SDK's for the most popular mobile platfor
 
 Configure the plugin under Settings -> Parse Api as describe in the instalation. 
 Every time you publish or save a published post it will create/update their 
-respective row on parse.com
+respective row on [Parse](http://parse.com)
 
 Then use the SDK of your prefered platform and start coding.
 
