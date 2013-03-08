@@ -50,6 +50,9 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
+**0.2.9***
+* Fix issue if no push certificate or valid push certificate was configured (thanks to raymondmuller)
+
 **0.2.8***
 * Small improvement, if categories are empty no push notification will be send
 
