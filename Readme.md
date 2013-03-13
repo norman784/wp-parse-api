@@ -52,6 +52,9 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
+**0.3.1**
+* Fixed bug that send push notification if category is null or an empty string, seems that my previous fixes not work :(
+
 **0.3.0**
 * Added an option to turn on/off push notifications
 * Added github plugin updater

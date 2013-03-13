@@ -3,7 +3,7 @@
 Plugin Name: Parse.com Api
 Plugin URI: http://github.com/norman784/wp-parse-api
 Description: Bridge between parse.com api and wordpress
-Version: 0.3.0
+Version: 0.3.1
 Author: Norman Paniagua
 Author URI: http://github.com/norman784
 License: GPL2
@@ -118,7 +118,8 @@ class WpParseApi
 			$categories = array();
 			
 			foreach ($post->data['categories'] as $row) {
-				$categories[] = preg_replace('/[^a-zA-Z]/', '', $row);
+				$row = trim(preg_replace('/[^a-zA-Z]/', '', $row));
+				if ($row != '') $categories[] = $row;
 			}
 			
 			// Check if there is no categories or push notifications are disabled
