@@ -3,13 +3,13 @@
 Plugin Name: Parse.com Api
 Plugin URI: http://github.com/norman784/wp-parse-api
 Description: Bridge between parse.com api and wordpress
-Version: 0.3.1
+Version: 0.4
 Author: Norman Paniagua
 Author URI: http://github.com/norman784
 License: GPL2
 
 /**
-  * @version 0.3.0
+  * @version 0.4
   * @author Norman Paniagua <normanpaniagua at gmail dot com>
   * @link http://github.com/norman784
   * @uses WordPress Parse Api @link https://github.com/norman784/wp-parse-api
@@ -34,7 +34,7 @@ License: GPL2
 
 define( 'WP_PARSE_API_PATH', 			plugin_dir_path(__FILE__));
 define( 'WP_PARSE_API_SLUG', 			plugin_basename( __FILE__ ) );
-define( 'WP_PARSE_API_VERSION', 		0.3 );
+define( 'WP_PARSE_API_VERSION', 		0.4 );
 define( 'WP_PARSE_API_PROPER_NAME', 	'wp-parse-api' );
 define( 'WP_PARSE_API_GITHUB_URL', 		'https://github.com/norman784/wp-parse-api' );
 define( 'WP_PARSE_API_GITHUB_ZIP_URL',	'https://github.com/norman784/wp-parse-api/zipball/master' );
@@ -123,9 +123,10 @@ class WpParseApi
 			}
 			
 			// Check if there is no categories or push notifications are disabled
-			if (count($categories) > 0 || get_option('app_push_notifications') != 'Off') {
+			if (is_array($categories) && count($categories) > 0 && get_option('app_push_notifications') != 'Off') {
 				try {
-					$push = new parsePush($post->data['title']);
+					$push = new parsePush();
+					$push->alert = $post->data['title'];
 					$push->channels = $categories;
 					$push->send();
 				} catch (Exception $e) {

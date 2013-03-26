@@ -29,6 +29,7 @@ and use it.
 	* photos (Array)
 	* thumbnail (Object)
 	* title (String)
+	* videos (Array)
 	* wpId (Number)
 4. Upload `wp-parse-api` to the `/wp-content/plugins/` directory
 5. Activate the plugin through the 'Plugins' menu in WordPress
@@ -51,6 +52,12 @@ respective row on [Parse](http://parse.com)
 Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
+
+**0.4**
+* Added support for youtube videos
+* Added some comments on the source code
+* Updated to publish the plugin on wordpress.org
+* Removed github updater
 
 **0.3.1**
 * Fixed bug that send push notification if category is null or an empty string, seems that my previous fixes not work :(
@@ -121,4 +128,4 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 The line below is used for the updater API, please leave it untouched unless bumping the version up :)
 
-~Current Version:0.3.0~
+~Current Version:0.4~

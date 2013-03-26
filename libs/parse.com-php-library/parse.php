@@ -1,4 +1,5 @@
 <?php
+
 include 'parseConfig.php';
 include 'parseObject.php';
 include 'parseQuery.php';
@@ -23,13 +24,21 @@ class parseRestClient{
 		$parseConfig = new parseConfig;
 		
 		$this->_appid = $parseConfig->APPID;
-		$this->_masterkey = $parseConfig->MASTERKEY;
-		$this->_restkey = $parseConfig->RESTKEY;
-		$this->_parseurl = $parseConfig->PARSEURL;
+    	$this->_masterkey = $parseConfig->MASTERKEY;
+    	$this->_restkey = $parseConfig->RESTKEY;
+    	$this->_parseurl = $parseConfig->PARSEURL;
 
 		if(empty($this->_appid) || empty($this->_restkey) || empty($this->_masterkey)){
 			$this->throwError('You must set your Application ID, Master Key and REST API Key');
 		}
+
+		$version = curl_version();
+		$ssl_supported = ( $version['features'] & CURL_VERSION_SSL );
+
+		if(!$ssl_supported){
+			$this->throwError('CURL ssl support not found');	
+		}
+
 	}
 
 	/*
@@ -44,11 +53,6 @@ class parseRestClient{
 		curl_setopt($c, CURLOPT_USERAGENT, 'parse.com-php-library/2.0');
 		curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($c, CURLINFO_HEADER_OUT, true);
-		
-		// <!--- Ugly hack taken from http://unitstep.net/blog/2009/05/05/using-curl-in-php-to-access-https-ssltls-protected-sites/
-		curl_setopt($c, CURLOPT_SSL_VERIFYPEER, 0);
-		// --->
-		
 		if(substr($args['requestUrl'],0,5) == 'files'){
 			curl_setopt($c, CURLOPT_HTTPHEADER, array(
 				'Content-Type: '.$args['contentType'],
@@ -97,9 +101,14 @@ class parseRestClient{
 		}
 
 		curl_setopt($c, CURLOPT_URL, $url);
+		
+		print_r(curl_getinfo($c));
+		print_r($postData."\n");
 
 		$response = curl_exec($c);
 		$responseCode = curl_getinfo($c, CURLINFO_HTTP_CODE);
+		
+		print_r($response);
 
 		$expectedCode = '200';
 		if($args['method'] == 'POST' && substr($args['requestUrl'],0,4) != 'push'){
@@ -200,12 +209,8 @@ class ParseLibraryException extends Exception{
 		if($code != 0){
 			$message = "parse.com error: ".$message;
 		}
-		
-		if (phpversion() < 5.3) {
-			parent::__construct($message, $code);
-		} else {
-			parent::__construct($message, $code, $previous);
-		}
+
+		parent::__construct($message, $code, $previous);
 	}
 
 	public function __toString() {
