@@ -101,14 +101,9 @@ class parseRestClient{
 		}
 
 		curl_setopt($c, CURLOPT_URL, $url);
-		
-		print_r(curl_getinfo($c));
-		print_r($postData."\n");
 
 		$response = curl_exec($c);
 		$responseCode = curl_getinfo($c, CURLINFO_HTTP_CODE);
-		
-		print_r($response);
 
 		$expectedCode = '200';
 		if($args['method'] == 'POST' && substr($args['requestUrl'],0,4) != 'push'){

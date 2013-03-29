@@ -47,13 +47,14 @@ class WpParseApiHelpers {
 		
 		// Extract the youtube video id's from the content
 		$urls = array('#http://www.youtube.com/embed/([A-Za-z0-9\-_]+)#s', '#http://www.youtube.com/watch?v=([A-Za-z0-9\-_]+)#s');
-		foreach ($urls as $url) {
+		
+		foreach ($urls as $url) :
 			$tmp = array();
 			preg_match_all($url, $wp_post->post_content, $tmp);
-			for ($tmp[1] as $v) {
+			foreach ($tmp[1] as $v) :
 				if (!in_array($v, $videos)) $videos[] = $v;
-			}
-		}
+			endforeach;
+		endforeach;
 		
 		// Remove unwanted strings from contents
 		$content = preg_replace('/\[.*?\](.+?)\[\/.*?\]/is', '', $wp_post->post_content);

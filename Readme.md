@@ -53,11 +53,12 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
+**0.4.1**
+* Bug fixes
+
 **0.4**
 * Added support for youtube videos
 * Added some comments on the source code
-* Updated to publish the plugin on wordpress.org
-* Removed github updater
 
 **0.3.1**
 * Fixed bug that send push notification if category is null or an empty string, seems that my previous fixes not work :(
@@ -123,9 +124,3 @@ Tested up to: 3.5
 License: GPLv2 or later
 
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-
-## Current Version
-
-The line below is used for the updater API, please leave it untouched unless bumping the version up :)
-
-~Current Version:0.4~
