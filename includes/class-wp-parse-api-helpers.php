@@ -1,5 +1,16 @@
 <?php
 class WpParseApiHelpers {
+	
+	private $lang = array(
+		'en' => array(), // Default
+		'es' => array(
+			'Jan' => 'Ene',
+			'Apr' => 'Abr',
+			'Aug' => 'Ago',
+			'Dec' => 'Dic'
+		)
+	);
+	
 	static public function postToObject($post_id) {
 		// Get the post
 		$wp_post = get_post($post_id);
@@ -19,13 +30,7 @@ class WpParseApiHelpers {
 		}
 		
 		// Set the date in spanish format
-		$date = date("d/M/Y", strtotime($wp_post->post_date));
-		strtr($date, array(
-			'Jan' => 'Ene',
-			'Apr' => 'Abr',
-			'Aug' => 'Ago',
-			'Dec' => 'Dic'
-		));
+		$date = strtr(date("d/M/Y", strtotime($wp_post->post_date)), $lang[get_option('lang') || 'en']);
 		
 		// Add the thumbnails
 		$thumbnails = array(

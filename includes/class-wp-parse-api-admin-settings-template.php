@@ -41,12 +41,23 @@ if (!current_user_can('manage_options')) {
 					</select>
 				</td>
 			</tr>
+			<tr valign="top">
+				<th  scope="row">Select date language</th>
+				<td>
+					<select name="lang">
+						<option value="en">English</option>
+						<option value="es" <?php
+							echo get_option('lang') == 'es' ? ' selected="selected"':''
+						?>>Español</option>
+					</select>
+				</td>
+			</tr>
 		</table>
 		
 		<h3>Parse Object</h3>
 		
 		<p>
-			Also you need to create a <strong>class</strong> in the <strong>Data Browser</strong> with a name you like or create an <strong>class</strong> named <strong>Post</strong>, 
+			Also you need to create a <strong>class</strong> in the <strong>Data Browser</strong> with a name you like or create an <strong>class</strong> named same as the <strong>Object Name</strong> (i.e. <strong>Post<strong>), 
 			with those fields:
 		</p>
 
@@ -67,7 +78,7 @@ if (!current_user_can('manage_options')) {
 			<tr valign="top">
 				<th  scope="row">Object Name*</th>
 				<td>
-					<input type="text" name="object_name" value="<?php echo get_option('object_name'); ?>">
+					<input type="text" name="object_name" value="<?php echo strlen(get_option('object_name')) > 0 ? get_option('object_name') : "Post"; ?>">
 				</td>
 			</tr>
 		</table>

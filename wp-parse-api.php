@@ -25,15 +25,6 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // define('LOG', dirname(__FILE__) . '/log.txt');
 
 define( 'WP_PARSE_API_PATH', 			plugin_dir_path(__FILE__));
-define( 'WP_PARSE_API_SLUG', 			plugin_basename( __FILE__ ) );
-define( 'WP_PARSE_API_VERSION', 		0.4 );
-define( 'WP_PARSE_API_PROPER_NAME', 	'wp-parse-api' );
-define( 'WP_PARSE_API_GITHUB_URL', 		'https://github.com/norman784/wp-parse-api' );
-define( 'WP_PARSE_API_GITHUB_ZIP_URL',	'https://github.com/norman784/wp-parse-api/zipball/master' );
-define( 'WP_PARSE_API_GITHUB_API_URL',	'https://api.github.com/repos/norman784/wp-parse-api' );
-define( 'WP_PARSE_API_GITHUB_RAW_URL',	'https://raw.github.com/norman784/wp-parse-api/master' );
-define( 'WP_PARSE_API_REQUIRES_WP',		'3.0.1' );
-define( 'WP_PARSE_API_TESTED_WP',		'3.5.0' );
 
 require_once WP_PARSE_API_PATH . 'libs/parse.com-php-library/parse.php';
 require_once WP_PARSE_API_PATH . 'includes/class-wp-parse-api-helpers.php';

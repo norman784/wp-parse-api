@@ -51,7 +51,18 @@ respective row on [Parse](http://parse.com)
 
 Then use the SDK of your prefered platform and start coding.
 
+## TODO
+
+* Better way to handle synchronization (don't research so much if wp has a build in cronjob)
+* Prepare for submit into the wordpress plugin repository
+* Built a log event registry and visualization
+* Add test case files
+
 ## Changelog
+
+**0.5.0**
+* Added date internationalization support (English, Español)
+* Bug fixes
 
 **0.4.1**
 * Bug fixes

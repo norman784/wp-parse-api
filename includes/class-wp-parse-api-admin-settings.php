@@ -17,6 +17,7 @@ if (is_admin()){	 // admin actions
 		register_setting('wp-parse-api-settings-group', 'app_restkey');
 		register_setting('wp-parse-api-settings-group', 'app_push_notifications');
 		register_setting('wp-parse-api-settings-group', 'object_name');
+		register_setting('wp-parse-api-settings-group', 'lang');
 	}
 	
 	function wp_parse_api_page() {
