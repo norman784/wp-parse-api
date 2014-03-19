@@ -1,7 +1,7 @@
 <?php
 class WpParseApiHelpers {
 	
-	private $lang = array(
+	private static $lang = array(
 		'en' => array(), // Default
 		'es' => array(
 			'Jan' => 'Ene',
@@ -30,7 +30,9 @@ class WpParseApiHelpers {
 		}
 		
 		// Set the date in spanish format
-		$date = strtr(date("d/M/Y", strtotime($wp_post->post_date)), $lang[get_option('lang') || 'en']);
+		$keys = array_keys(self::$lang);
+		$lang = self::$lang[in_array(get_option('lang'), $keys) ? get_option('lang') : $keys[0]];
+		$date = strtr(date("d/M/Y", strtotime($wp_post->post_date)), $lang);
 		
 		// Add the thumbnails
 		$thumbnails = array(
@@ -79,7 +81,7 @@ class WpParseApiHelpers {
 		$post->title		= $wp_post->post_title;
 		$post->videos		= $videos;
 		$post->wpId			= (int)$post_id;
-		
+
 		// Return the post
 		return $post;
 	}
