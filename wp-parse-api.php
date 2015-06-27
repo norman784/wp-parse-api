@@ -111,8 +111,13 @@ class WpParseApi
 					$push = new parsePush();
 					$push->alert = $post->data['title'];
 					$push->channels = $categories;
-					$push->send();
-				} catch (Exception $e) {
+					$push->badge = "increment";
+					$push->sound = "example.caf";
+					$push->post_id = $post->data[wpId];
+					$push->url = $post->data['guid'];
+					$push->category = "ACTIONABLE";
+					$push->send();				} 
+					catch (Exception $e) {
 					// do nothing, this was added because 
 					// parse lib throws an exception if the account
 					// has not been configured
