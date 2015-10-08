@@ -26,7 +26,7 @@ if (is_admin()){	 // admin actions
 	
 	function wp_parse_api_sync() {
 		$numberposts = 10;
-		'post_type' => WP_PARSE_API_OBJECT_NAME,
+		
 		$_GET['wp-parse-api-page'] = (int)$_GET['wp-parse-api-page'];
 		if ($_GET['wp-parse-api-page'] < 1) $_GET['wp-parse-api-page'] = 1;
 		
