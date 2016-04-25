@@ -1,3 +1,7 @@
+## Parse its shutting down their BaaS, but they open sourced it at [parse-server](https://github.com/ParsePlatform/parse-server), please consider this before try to use this plugin, b/c its not prepared for use outside parse, it can be used but need to point all the endpoints urls to your own parse server
+
+Also I'm not maintaining anymore this plugin, you can fork it and make your changes or submit al pullrequest
+
 # WordPress Parse Api
 
 [![Join the chat at https://gitter.im/norman784/wp-parse-api](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/norman784/wp-parse-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
