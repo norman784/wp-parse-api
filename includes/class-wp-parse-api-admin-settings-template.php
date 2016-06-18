@@ -31,6 +31,10 @@ if (!current_user_can('manage_options')) {
 				<td><input type="text" name="app_restkey" value="<?php echo get_option('app_restkey'); ?>"></td>
 			</tr>
 			<tr valign="top">
+				<th  scope="row">App URL (https://&#60;yoururl&#62;/&#60;yourendpoint&#62;)</th>
+				<td><input type="text" name="app_url" value="<?php echo get_option('app_url'); ?>"></td>
+			</tr>
+			<tr valign="top">
 				<th  scope="row">Push notifications</th>
 				<td>
 					<select name="app_push_notifications">
