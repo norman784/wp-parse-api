@@ -66,6 +66,9 @@ Then use the SDK of your prefered platform and start coding.
 
 ## Changelog
 
+**0.5.1**
+* Check that the app url ends with `/`, if not we add it
+
 **0.5.0**
 * Added date internationalization support (English, Español)
 * Bug fixes
